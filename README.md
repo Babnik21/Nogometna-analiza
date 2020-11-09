@@ -6,9 +6,9 @@ tekem iskal zaključke. Rezultate in statistike tekem bom dobil na spletni stran
 (https://www.flashscore.com/).
 
 Za vsako tekmo bom zajel:
-* Končni rezultat ter rezultat ob polčasu
+* Končni rezultat tekem
 * Lokacijo tekme (doma/v gosteh) za obe ekipi
-* Datum tekme ter krog v ligi
+* Datum tekme
 * Statistične podatke tekme (streli, koti, kartoni...)
 
 
