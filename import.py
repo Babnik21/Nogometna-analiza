@@ -221,7 +221,7 @@ def league_data(league, country, n_teams, season = "2019-2020", n_tries = 0):
     browser = load_more_matches(browser)
 
     game_links = []
-    while len(game_links) != n_teams * (n_teams - 1):
+    while len(game_links) < n_teams * (n_teams - 1):
         print(len(game_links))
         browser = load_more_matches(browser)
         games = browser.find_elements_by_class_name("event__match")
@@ -240,10 +240,24 @@ def league_data(league, country, n_teams, season = "2019-2020", n_tries = 0):
 
     return None
 
-country = "england"
-league = "premier-league"
-season = "2016-2017"
+
+seznam_sezon = ["2018-2019", "2017-2018", "2016-2017", "2015-2016"]
+country = "france"
+league = "ligue-1"
 n_teams = 20
 
-league_data(league, country, n_teams, season=season)
-league_matches_csv(league, season)
+for season in seznam_sezon:
+    league_data(league, country, n_teams, season=season)
+    league_matches_csv(league, season)
+    print(season + " v ligi " + league + " successful!")
+print("Liga " + league + " success!")
+
+country = "italy"
+league = "serie-a"
+n_teams = 20
+
+for season in seznam_sezon:
+    league_data(league, country, n_teams, season=season)
+    league_matches_csv(league, season)
+    print(season + " v ligi " + league + " successful!")
+print("Liga " + league + " success!")
