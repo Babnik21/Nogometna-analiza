@@ -151,7 +151,6 @@ def get_match_stats(page, league, team = None, season = None):
 
 
 # Collects all matches played in selected league (and season) and merges all data into one frame, stores it in csv
-# Modify this one so that is only seeks for league name not team name
 def league_matches_csv(league, season, matches = pandas.DataFrame()):
     filename = "data/" + league + '-' + season + '.csv'
     matches_path = glob("data/{}/{}/*.csv".format(league, season))
@@ -165,6 +164,9 @@ def league_matches_csv(league, season, matches = pandas.DataFrame()):
         pass
     matches.to_csv(filename, index=True)
     return matches
+
+for season in ["2015-2016", "2016-2017", "2017-2018", "2018-2019"]:
+    league_matches_csv("ligue-1", season)
 
 
 # Scrolls to the bottom of page (copied)
@@ -240,24 +242,3 @@ def league_data(league, country, n_teams, season = "2019-2020", n_tries = 0):
 
     return None
 
-
-seznam_sezon = ["2018-2019", "2017-2018", "2016-2017", "2015-2016"]
-country = "france"
-league = "ligue-1"
-n_teams = 20
-
-for season in seznam_sezon:
-    league_data(league, country, n_teams, season=season)
-    league_matches_csv(league, season)
-    print(season + " v ligi " + league + " successful!")
-print("Liga " + league + " success!")
-
-country = "italy"
-league = "serie-a"
-n_teams = 20
-
-for season in seznam_sezon:
-    league_data(league, country, n_teams, season=season)
-    league_matches_csv(league, season)
-    print(season + " v ligi " + league + " successful!")
-print("Liga " + league + " success!")
