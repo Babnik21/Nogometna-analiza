@@ -165,10 +165,6 @@ def league_matches_csv(league, season, matches = pandas.DataFrame()):
     matches.to_csv(filename, index=True)
     return matches
 
-for season in ["2015-2016", "2016-2017", "2017-2018", "2018-2019"]:
-    league_matches_csv("ligue-1", season)
-
-
 # Scrolls to the bottom of page (copied)
 def scroll_down(driver):
     Scroll_pause_time = 0.5
