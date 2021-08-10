@@ -5,7 +5,7 @@ from glob import glob
 
 sample = pandas.read_csv("data/laliga-2015-2016.csv")
 
-#Adds one team to the season table
+# Doda ekipo v lestvico sezone
 def add_row(games, df, team_name):
     home_games = games[games["team"] == team_name]
     away_games = games[games["opponent"] == team_name]
@@ -19,7 +19,7 @@ def add_row(games, df, team_name):
     row = pandas.DataFrame([[points, goal_diff, goals, opp_goals, wins, draws, losses]], columns = ["PTS", "Goal Difference", "Goals", "Goals against", "Wins", "Draws", "Losses"], index = [team_name])
     return pandas.concat([df, row])
 
-#Returns a season table
+# Vrne lestvico sezone
 def get_table(games):
     teams = set(games["team"].tolist())
     table = pandas.DataFrame()
@@ -27,10 +27,10 @@ def get_table(games):
         table = add_row(games, table, team)
     return table.sort_values(by = "PTS", ascending=False)
 
-#List of paths to each season's csv
+#Seznam poti za vsako sezono
 season_paths = glob("data/*.csv")
 
-#Makes a table for each season
+# Lestvica za vsako sezono
 def make_tables(paths):
     for path in paths:
         matches = pandas.read_csv(path)
@@ -39,7 +39,8 @@ def make_tables(paths):
         table.to_csv(path_2, index=True)
 
 
-#Makes all tables for every season I have data for
-#make_tables(season_paths)
+# Ustvari vse lestvice (iz vseh sezon, za katere so na voljo podatki)
+
+make_tables(season_paths)
 
 
