@@ -43,11 +43,11 @@ def date_diff(date_1, date_2):
     if date_1 == date_2:
         return 0
     elif is_recent(date_1, date_2):
-        prvi = date_1.split('.')
-        drugi = date_2.split('.')
-        diff = 365*(int(prvi[2]) - int(drugi[2]))
-        diff += 30*(int(prvi[1]) - int(drugi[1]))
-        return diff + int(prvi[0]) - int(drugi[0])
+        first = date_1.split('.')
+        second = date_2.split('.')
+        diff = 365*(int(first[2]) - int(second[2]))
+        diff += 30*(int(first[1]) - int(second[1]))
+        return diff + int(first[0]) - int(second[0])
     else:
         return date_diff(date_2, date_1)
 
@@ -80,9 +80,9 @@ def convert_table(list):
     return new_list
 
 # Spremeni datum v y-m-d format
-def dmy_to_ymd(datum):
-    datum = datum.split('.')
-    return(datum[2]+'-'+datum[1]+'-'+datum[0])
+def dmy_to_ymd(date):
+    date = date.split('.')
+    return(date[2]+'-'+date[1]+'-'+date[0])
 
 # Spremeni datum v d.m.y format
 def ymd_to_dmy(date):
@@ -119,8 +119,10 @@ def get_match_stats(page, league, team = None, season = None):
         rezultat = soup.find_all('span', {"class": "scoreboard"})               # Poišče rezultat
 
         match_date = match_time[0].text.strip()[:10]
-        teams = [remove_brackets(imena[0].text.strip()), remove_brackets(imena[1].text.strip())]
-        match_id = league + "-" + season + '-' + dmy_to_ymd(match_date) + '-' + teams[0] + '-' + teams[1]
+        teams = [remove_brackets(imena[0].text.strip()), \
+            remove_brackets(imena[1].text.strip())]
+        match_id = league + "-" + season + '-' + \
+            dmy_to_ymd(match_date) + '-' + teams[0] + '-' + teams[1]
         selected_team_index = teams[1] == team 
         season_list = ["season", season]                                        # Za razvrščanje v pravilne stolpce tabele
         medium_list = [["match", match_id], ["league", league]]
@@ -129,10 +131,10 @@ def get_match_stats(page, league, team = None, season = None):
         else:
             medium_list += [["home/away", "home"]]
         medium_list += [["team", teams[selected_team_index]],
-                        ["opponent", teams[not selected_team_index]],
-                        ["date", match_date],
-                        ["goals", rezultat[selected_team_index].text.strip()], 
-                        ["opponent goals", rezultat[not selected_team_index].text.strip()]]     # Seznam za statistiko (najprej osnovni podatki)
+            ["opponent", teams[not selected_team_index]],
+            ["date", match_date],
+            ["goals", rezultat[selected_team_index].text.strip()], 
+            ["opponent goals", rezultat[not selected_team_index].text.strip()]]     # Seznam za statistiko (najprej osnovni podatki)
         medium_list.append(season_list)
         counter = -1                                                            # Ugotovi, kateremu delu tekme statistika pripada
         for el in tag:                                                          # Zanka čez vse div-e s statistiko, jo shrani
@@ -142,8 +144,10 @@ def get_match_stats(page, league, team = None, season = None):
                 stat.append(el.text)
             if stat[1] == "Ball Possession":                                    #(Ball possession je prva na seznamu), ko jo srečamo je na vrsti statistika iz naslednjega dela tekme
                 counter += 1
-            medium_list.append([str(match_parts[counter] + stat[1]), stat[2*int(selected_team_index)]])
-            medium_list.append([str("opponent " + match_parts[counter] + stat[1]), stat[2*int(not selected_team_index)]])
+            medium_list.append([str(match_parts[counter] + stat[1]), \
+                stat[2*int(selected_team_index)]])
+            medium_list.append([str("opponent " + match_parts[counter] + \
+                stat[1]), stat[2*int(not selected_team_index)]])
         browser.quit()
     except:
         browser.quit()
@@ -166,7 +170,8 @@ def league_matches_csv(league, season, matches = pandas.DataFrame()):
     matches.to_csv(filename, index=True)
     return matches
 
-# Poišče dno strani (tam je treba klikniti gumb, ki sicer ni viden) - stackoverflow
+# Poišče dno strani (tam je treba klikniti gumb, ki sicer ni viden)
+# Poiskal pomoč na Stackoverflow: https://stackoverflow.com/questions/20986631/how-can-i-scroll-a-web-page-using-selenium-webdriver-in-python
 def scroll_down(driver):
     Scroll_pause_time = 0.5
 
@@ -202,7 +207,8 @@ def load_more_matches(browser):
 # Posodobi celotno sezono za eno ligo
 def league_data(league, country, n_teams, season = "2019-2020", n_tries = 0):
     browser = webdriver.Firefox()
-    link = "https://www.flashscore.com/football/" + country + "/" + league + "-" + season + "/results/"
+    link = "https://www.flashscore.com/football/" + country + \
+        "/" + league + "-" + season + "/results/"
     browser.get(link)
 
     print(link)
@@ -227,7 +233,8 @@ def league_data(league, country, n_teams, season = "2019-2020", n_tries = 0):
         game_links = []
         for game in games:
             game_id = game.get_attribute("id")
-            game_links.append("https://www.flashscore.com/match/" + game_id[4:] + "/#match-statistics;0")
+            game_links.append("https://www.flashscore.com/match/" + \
+                game_id[4:] + "/#match-statistics;0")
 
     print(len(game_links))
     
@@ -238,4 +245,6 @@ def league_data(league, country, n_teams, season = "2019-2020", n_tries = 0):
         stats_to_csv(statistics, league, season)
 
     return None
+
+
 
