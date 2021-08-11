@@ -97,7 +97,7 @@ def stats_to_csv(stat_list, league, season):
         return None
     elif "Friend" in stat_list[1][1]:
         return None
-    file_name = "data/{}/{}/{}.csv".format(league, season, stat_list[1][0])  # Sestavi ime datoteke
+    file_name = "data/input/{}/{}/{}.csv".format(league, season, stat_list[1][0])  # Sestavi ime datoteke
     frame = pandas.DataFrame.from_records(stat_list[1:], columns=stat_list[0])
     if not path.exists(file_name):
         frame.to_csv(file_name, index=False)
@@ -157,8 +157,8 @@ def get_match_stats(page, league, team = None, season = None):
 
 # Zbere vse tekme iz ene lige in ene sezone, združi v skupno tabelo in shrani v csv
 def league_matches_csv(league, season, matches = pandas.DataFrame()):
-    filename = "data/" + league + '-' + season + '.csv'
-    matches_path = glob("data/{}/{}/*.csv".format(league, season))
+    filename = "data/input/" + league + '-' + season + '.csv'
+    matches_path = glob("data/input/{}/{}/*.csv".format(league, season))
     for csv in matches_path:
         added_frame = pandas.read_csv(csv)
         if added_frame.loc[0, "league"] == remove_brackets(league):

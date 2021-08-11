@@ -3,7 +3,6 @@ import pandas
 import time
 from glob import glob
 
-sample = pandas.read_csv("data/laliga-2015-2016.csv")
 
 # Doda ekipo v lestvico sezone
 def add_row(games, df, team_name):
@@ -28,19 +27,18 @@ def get_table(games):
     return table.sort_values(by = "PTS", ascending=False)
 
 #Seznam poti za vsako sezono
-season_paths = glob("data/*.csv")
+season_paths = glob("data/input/*.csv")
 
 # Lestvica za vsako sezono
 def make_tables(paths):
     for path in paths:
         matches = pandas.read_csv(path)
-        path_2 = "tables" + path[4:]
+        path_2 = "data/tables" + path[4:]
         table = get_table(matches)
         table.to_csv(path_2, index=True)
 
 
 # Ustvari vse lestvice (iz vseh sezon, za katere so na voljo podatki)
-
 make_tables(season_paths)
 
 
