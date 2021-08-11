@@ -31,7 +31,7 @@ in asistentom).
 `tables.py` vsebuje funkcije, ki preberejo `.csv` datoteke iz mape `/data` in ustvarijo nove `.csv` 
 datoteke z lestvicami in jih shrani v mapo `/tables`.
 
-# Rezultati
+## Rezultati
 
 Na podlagi analize podatkov sem prišel do naslednjih zaključkov:
 * Zmagovalci francoske lige statistično izgledajo najbolj izrazito močnejši od svoje konkurence, vendar pa 
