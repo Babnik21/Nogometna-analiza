@@ -23,13 +23,18 @@ nasprotnikih, lokaciji tekme, rezultatu, in raznih statističnih podatkih (npr. 
 koti, kartoni, posest žoge...), vse za 1. polčas, 2. polčas ter skupno. Iz tega sem naredil tudi 
 tabele, ki predstavljajo končno lestvico pripadajoče sezone.
 
-`import.py` vsebuje vse funkcije, uporabljene pri uvozu podatkov. Uporabil sem knjižnico selenium,
-saj je bil potreben klik določenega gumba, da sem dobil dostop do vseh tekem. Rešitve brez uporabe
-te knjižnice sem se izognil, saj sem jih ocenil kot prezahtevne (tudi po pogovoru s profesorjem
-in asistentom).
+`import.py` vsebuje vse funkcije, uporabljene pri uvozu podatkov. 
 
 `tables.py` vsebuje funkcije, ki preberejo `.csv` datoteke iz mape `/data/input` in ustvarijo nove `.csv` 
 datoteke z lestvicami in jih shrani v mapo `/data/tables`.
+
+## Uporabljene knjižnice
+
+* pandas 
+* bs4 (za branje podatkov iz html-ja)
+* selenium (za upravljanje brskalnika)
+* matplotlib (za risanje grafov)
+* ipywidgets (za interaktivne grafe)
 
 ## Rezultati
 

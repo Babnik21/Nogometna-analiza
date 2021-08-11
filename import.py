@@ -3,18 +3,10 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 import time
 import bs4
-import requests
 import time
-import csv
 import pandas
-import os
 from os import path
 from glob import glob
-from numpy import mean
-from numpy import std
-from numpy.random import randn
-from numpy.random import seed
-from datetime import date
 from dateutil.parser import parse
 
 # Vrne true, če niz predstavlja datum

@@ -1,21 +1,23 @@
-from numpy import add
 import pandas
-import time
 from glob import glob
 
 
-# Doda ekipo v lestvico sezone
+# Doda ekipo (vrstico) v lestvico sezone
 def add_row(games, df, team_name):
     home_games = games[games["team"] == team_name]
     away_games = games[games["opponent"] == team_name]
     goals = sum(home_games["goals"]) + sum(away_games["opponent goals"])
     opp_goals = sum(home_games["opponent goals"]) + sum(away_games["goals"])
     goal_diff = goals - opp_goals
-    wins = len(home_games[home_games["goals"] > home_games["opponent goals"]].index) + len(away_games[away_games["goals"] < away_games["opponent goals"]].index)
-    draws = len(home_games[home_games["goals"] == home_games["opponent goals"]].index) + len(away_games[away_games["goals"] == away_games["opponent goals"]].index)
+    wins = len(home_games[home_games["goals"] > home_games["opponent goals"]].index) + \
+        len(away_games[away_games["goals"] < away_games["opponent goals"]].index)
+    draws = len(home_games[home_games["goals"] == home_games["opponent goals"]].index) + \
+        len(away_games[away_games["goals"] == away_games["opponent goals"]].index)
     losses = len(home_games.index) + len(away_games.index) - wins - draws
     points = 3 * wins + draws
-    row = pandas.DataFrame([[points, goal_diff, goals, opp_goals, wins, draws, losses]], columns = ["PTS", "Goal Difference", "Goals", "Goals against", "Wins", "Draws", "Losses"], index = [team_name])
+    row = pandas.DataFrame([[points, goal_diff, goals, opp_goals, wins, draws, losses]], \
+        columns = ["PTS", "Goal Difference", "Goals", "Goals against", "Wins", "Draws", "Losses"], \
+        index = [team_name])
     return pandas.concat([df, row])
 
 # Vrne lestvico sezone
