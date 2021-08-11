@@ -16,7 +16,7 @@ Delovne hipoteze:
 * Ali se doseženi in prejeti goli različno vplivajo na število točk?
 * Ali je vpliv zmag in porazov na število točk enak? Kakšen je vpliv remijev?
 
-Pri tem bom uporabil `.csv` datoteke, ki jih najdemo v mapi `/data`. Vsaka `.csv` datoteka vsebuje vse
+Pri tem bom uporabil `.csv` datoteke, ki jih najdemo v mapi `/data/input`. Vsaka `.csv` datoteka vsebuje vse
 tekme odigrane v izbrani sezoni, za določeno ligo. V podmapah so tudi `.csv` datoteke vsake posamezne
 tekme, vendar za ta projekt niso pomembne. V vsaki tabeli so shranjeni podatki o obeh
 nasprotnikih, lokaciji tekme, rezultatu, in raznih statističnih podatkih (npr. streli v okvir gola,
@@ -28,8 +28,8 @@ saj je bil potreben klik določenega gumba, da sem dobil dostop do vseh tekem. R
 te knjižnice sem se izognil, saj sem jih ocenil kot prezahtevne (tudi po pogovoru s profesorjem
 in asistentom).
 
-`tables.py` vsebuje funkcije, ki preberejo `.csv` datoteke iz mape `/data` in ustvarijo nove `.csv` 
-datoteke z lestvicami in jih shrani v mapo `/tables`.
+`tables.py` vsebuje funkcije, ki preberejo `.csv` datoteke iz mape `/data/input` in ustvarijo nove `.csv` 
+datoteke z lestvicami in jih shrani v mapo `/data/tables`.
 
 ## Rezultati
 
